@@ -18,6 +18,11 @@ mongoose.connect('mongodb+srv://piyushkulkarni:EdjFKc26KGwxg.T@cluster0.mpjzl9q.
 });
 
 //socket logic
+io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+});
 
 
 server.listen(PORT, () => {
