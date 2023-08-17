@@ -24,7 +24,7 @@ const {username, password} = req.body;
 
 router.post("/signin",async (req,res) =>{
     const {username, password} = req.headers;
-      const user = await User.findOne({username:username,password:password});
+      const user = await User.find({username:username,password:password});
       if(user){
         const token = jwt.sign({username ,role:user},SECRET,{expiresIn:'1h'});
         res.json({message: 'user loggedin', token});
