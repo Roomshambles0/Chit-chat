@@ -20,7 +20,7 @@ function Signin(){
               paddingTop: 150,
               paddingBottom:10                }
       }>
-<Typography variant="h5" style={{color:"white"}}> Welcome to CHITCHAT! please log in</Typography>
+<Typography variant="h5" > Welcome to CHITCHAT! please log in</Typography>
       </div>
 
   <div style={

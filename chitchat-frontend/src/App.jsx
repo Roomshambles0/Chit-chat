@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+
 import {
   BrowserRouter as Router,
   Route,
@@ -14,21 +14,21 @@ import {
   useRecoilValue,
 } from 'recoil';
 
-import Box from '@mui/material/Box';
+
 import Paper from '@mui/material/Paper';
 import Appbar from './Appbar';
 import Signup from './Signup';
 import Signin from './Signin';
-
+import Chatform from './Chatform';
 
 
 function App() {
 
   return (<>
-        <div style={{backgroundColor:"black"}}>
+        <div>
           <Paper   style={{ width: "100%",
       minHeight: "100vh",
-      backgroundColor:'#121212'
+    
       }}>
     <RecoilRoot>
     <Router> 
@@ -36,7 +36,7 @@ function App() {
       <Routes>
       <Route path='/signup' element={<Signup />}/>
       <Route path='/signin' element={<Signin />}/>
-      
+      <Route path='/chatform' element={<Chatform />}/>
       </Routes>  
     </Router>
     </RecoilRoot>

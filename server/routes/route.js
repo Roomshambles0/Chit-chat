@@ -22,6 +22,15 @@ const {username, password} = req.body;
   }
 })
 
+router.get("/me",authenticateJwt,async (req,res) =>{
+  const user = req.user;
+  if(user){
+    res.status(200).json({user:user})
+}else{
+    res.sendStatus(404);
+  }
+})
+
 router.post("/signin",async (req,res) =>{
     const {username, password} = req.headers;
       const user = await User.find({username:username,password:password});

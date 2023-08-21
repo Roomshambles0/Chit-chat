@@ -1,4 +1,4 @@
-import { useState,Fragment} from 'react';
+import { useState,Fragment, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,26 +16,70 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
-
+import Stack from '@mui/material/Stack';
+import axios from 'axios';
+import Avatar from '@mui/material/Avatar';
 
 export default function Appbar() {
+  const navigate = useNavigate();
+   const [username, setusername] = useState(); 
+   const init = async () => {
+      const response = await axios.get("http://localhost:3000/chat/me",{
+        headers :{
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      const user = response.data;
+      console.log (username);
+      setusername(user);
+   };
+  useEffect(()=>{init();},[])
+    
+ if(username){
   return (
-   
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color='inherit' >
-        <Toolbar variant="dense">
+      <AppBar position="static" >
+        <Toolbar >
           <Sidebar/>
-          <Typography variant="h6" color="inherit" component="div">
+          <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
            CHITCHAT
           </Typography>
+          <Stack spacing={2} direction="row">
+          <Avatar src="/broken-image.jpg" />
+          <Button variant="outlined" color="inherit" size='large' onClick={()=>{
+            localStorage.removeItem('token')
+            navigate('/signin');
+          }}>Logout</Button>
+          </Stack>
         </Toolbar>
+        
       </AppBar>
     </Box>
- 
+  )}
+  else{
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" >
+        <Toolbar >
+          <Sidebar/>
+          <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
+           CHITCHAT
+          </Typography>
+          <Stack spacing={2} direction="row">
+          <Button  variant="outlined" color="inherit" size='large' onClick={()=>{
+            navigate('/signup');
+          }}>Signup</Button>
+          <Button variant="outlined" color="inherit" size='large' onClick={()=>{
+            navigate('/signin');
+          }}>Login</Button>
+           </Stack>
+        </Toolbar>
+        
+      </AppBar>
+    </Box>
   );
 }
-
+}
 function Sidebar() {
   const navigate = useNavigate();
   const [state, setState] = useState({

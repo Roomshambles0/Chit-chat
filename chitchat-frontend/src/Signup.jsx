@@ -24,7 +24,7 @@ function Signup(){
                     paddingBottom:10                }
             }>
               
-     <Typography variant="h5" style={{color:"white"}}>Please Signup</Typography>
+     <Typography variant="h5" >Please Signup</Typography>
             </div>
 
         <div style={
